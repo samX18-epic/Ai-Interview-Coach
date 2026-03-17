@@ -1,0 +1,13 @@
+{
+  "name": "ai-interview-coach-root",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "install": "cd Backend && npm install",
+    "build": "echo 'No root build required'",
+    "start": "cd Backend && npm start"
+  }
+}

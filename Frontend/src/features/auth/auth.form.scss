@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+// ── Design tokens (unified dark theme) ────────────────────────────────────────
+$bg-page:      #080b14;
+$bg-surface:   #0f1623;
+$bg-card:      #131c2e;
+$bg-input:     #1a2235;
+$border:       rgba(255,255,255,0.08);
+$border-focus: rgba(120,100,240,0.55);
+$text-primary: #e8edf5;
+$text-muted:   #6b7a99;
+$accent:       #7c6ee6;
+$accent-dark:  #5b4cbb;
+$accent-glow:  rgba(124,110,230,0.22);
+
+*, *::before, *::after { box-sizing: border-box; }
+
+// ── Page shell ────────────────────────────────────────────────────────────────
+main.auth-page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $bg-page;
+    background-image:
+        radial-gradient(ellipse 60% 50% at 20% 0%, rgba(124,110,230,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 100%, rgba(79,70,229,0.10) 0%, transparent 60%);
+    font-family: 'Inter', system-ui, sans-serif;
+    padding: 1.5rem;
+}
+
+// ── Card ─────────────────────────────────────────────────────────────────────
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: $bg-surface;
+    border: 1px solid $border;
+    border-radius: 1.25rem;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    box-shadow: 0 24px 80px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04) inset;
+
+    // ── Logo ──────────────────────────────────────────────────────────────────
+    .auth-logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 0.75rem;
+        background: linear-gradient(135deg, $accent, #4f46e5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+        box-shadow: 0 0 24px $accent-glow;
+    }
+
+    h1 {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: $text-primary;
+        text-align: center;
+        margin: 0;
+        letter-spacing: -0.02em;
+    }
+
+    .auth-subtitle {
+        font-size: 0.85rem;
+        color: $text-muted;
+        text-align: center;
+        margin: 0 0 1.25rem;
+    }
+
+    // ── Form ──────────────────────────────────────────────────────────────────
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    // ── Field group (label + input) ────────────────────────────────────────────
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+
+        label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: $text-muted;
+            letter-spacing: 0.04em;
+        }
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        background: $bg-input;
+        border: 1px solid $border;
+        border-radius: 0.6rem;
+        color: $text-primary;
+        font-size: 0.9rem;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+
+        &::placeholder { color: rgba($text-muted, 0.55); }
+
+        &:focus {
+            border-color: $border-focus;
+            box-shadow: 0 0 0 3px rgba($accent, 0.12);
+        }
+    }
+
+    // ── Primary CTA ───────────────────────────────────────────────────────────
+    .primary-button {
+        width: 100%;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 0.6rem;
+        background: linear-gradient(135deg, $accent, #4f46e5);
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        transition: opacity 0.2s, transform 0.15s;
+        margin-top: 0.25rem;
+
+        &:hover:not(:disabled) { opacity: 0.88; transform: translateY(-1px); }
+        &:active:not(:disabled) { transform: scale(0.98); }
+        &:disabled { opacity: 0.5; cursor: not-allowed; }
+    }
+
+    // ── Divider ───────────────────────────────────────────────────────────────
+    .auth-divider {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0.25rem 0;
+
+        &::before, &::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: $border;
+        }
+
+        span {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: $text-muted;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+    }
+
+    // ── Social buttons ────────────────────────────────────────────────────────
+    .social-buttons {
+        display: flex;
+        gap: 0.65rem;
+    }
+
+    .social-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.65rem 0.75rem;
+        background: $bg-card;
+        border: 1px solid $border;
+        border-radius: 0.6rem;
+        color: $text-primary;
+        font-size: 0.82rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
+        white-space: nowrap;
+
+        svg path { fill: currentColor; }
+
+        &:hover:not(:disabled) {
+            background: $bg-input;
+            border-color: rgba(255,255,255,0.14);
+        }
+        &:disabled { opacity: 0.5; cursor: not-allowed; }
+    }
+
+    // Google icon keep original colours
+    .social-btn--google svg path { fill: revert; }
+
+    // ── Footer link ───────────────────────────────────────────────────────────
+    .auth-footer {
+        margin-top: 1rem;
+        font-size: 0.82rem;
+        color: $text-muted;
+        text-align: center;
+
+        a {
+            color: $accent;
+            text-decoration: none;
+            font-weight: 600;
+            &:hover { text-decoration: underline; }
+        }
+    }
+}

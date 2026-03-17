@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
 
     const register = async ({ username, email, password }) => {
         try {
+            setError(null);
             const data = await registerApi({ username, email, password });
             const userData = data?.user || data?.data || data;
             setUser(userData);
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async ({ email, password }) => {
         try {
+            setError(null);
             const data = await loginApi({ email, password });
             const userData = data?.user || data?.data || data;
             setUser(userData);

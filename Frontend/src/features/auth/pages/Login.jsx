@@ -25,7 +25,7 @@ const GitHubLogo = () => (
 )
 
 const Login = () => {
-    const { loading, handleLogin } = useAuth()
+    const { loading, error, handleLogin } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
@@ -46,6 +46,13 @@ const Login = () => {
 
                 <h1>Welcome back</h1>
                 <p className="auth-subtitle">Sign in to your ResumeOS account</p>
+
+                {error && (
+                    <div className="form-error" style={{ marginBottom: '1.5rem' }}>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        {error}
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit}>
                     <div className="field">

@@ -19,7 +19,7 @@ export async function register({ username, email, password }) {
         return response.data;
     } catch (error) {
         const url = error?.config?.url || 'unknown URL';
-        const message = error?.response?.data?.message || err.message || error?.message || 'Registration failed';
+        const message = error?.response?.data?.message || error?.message || 'Request failed';
         console.error('Registration error:', message);
         throw new Error(`${message} (Attempted to reach: ${url})`);
     }
@@ -35,7 +35,7 @@ export async function login({ email, password }) {
         return response.data;
     } catch (error) {
         const url = error?.config?.url || 'unknown URL';
-        const message = error?.response?.data?.message || err.message || error?.message || 'Login failed';
+        const message = error?.response?.data?.message || error?.message || 'Request failed';
         console.error('Login error:', message);
         throw new Error(`${message} (Attempted to reach: ${url})`);
     }

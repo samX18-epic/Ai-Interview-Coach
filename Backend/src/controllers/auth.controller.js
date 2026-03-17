@@ -21,10 +21,19 @@ const registerUserController = async (req, res) => {
     }
     const hash = await bcrypt.hash(password, 10);
     const user = await userModel.create({ name: username, email, password: hash });
+    
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 24 * 60 * 60 * 1000
+    });
+
     return res.status(201).json({
         status: 'success',
-        message: 'User registered successfully',
-        data: user
+        message: 'User registered and logged in successfully',
+        user: { id: user._id, email: user.email, username: user.name }
     });
 };
 
@@ -47,7 +56,8 @@ const loginUserController = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        secure: process.env.NODE_ENV === "production",
         maxAge: 24 * 60 * 60 * 1000  // 24 hours — matches JWT expiry
     });
     res.status(200).json({
@@ -70,7 +80,11 @@ async function logoutUserController(req, res) {
         });
     }
     await tokenBlacklistModel.create({ token });
-    res.clearCookie("token");
+    res.clearCookie("token", {
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        secure: process.env.NODE_ENV === "production"
+    });
     res.status(200).json({
         status: 'success',
         message: 'User logged out successfully'

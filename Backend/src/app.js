@@ -9,8 +9,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-// ─── Initialise Express App ────────────────────────────────────────────────────
 const app = express();
+app.set('trust proxy', 1);
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
 

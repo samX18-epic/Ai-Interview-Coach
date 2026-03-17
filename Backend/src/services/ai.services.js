@@ -206,7 +206,11 @@ Return a JSON object with a single field "html".
     const { html } = JSON.parse(textContent);
 
     // Convert HTML to PDF buffer using Puppeteer
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+    const browser = await puppeteer.launch({ 
+        headless: true, 
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+    });
     try {
         const page = await browser.newPage();
         await page.setContent(html, { waitUntil: 'networkidle0' });

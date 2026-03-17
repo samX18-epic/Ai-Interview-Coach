@@ -18,9 +18,10 @@ export async function register({ username, email, password }) {
         );
         return response.data;
     } catch (error) {
-        const message = error?.response?.data?.message || error?.message || 'Registration failed';
+        const url = error?.config?.url || 'unknown URL';
+        const message = error?.response?.data?.message || err.message || error?.message || 'Registration failed';
         console.error('Registration error:', message);
-        throw new Error(message);
+        throw new Error(`${message} (Attempted to reach: ${url})`);
     }
 }
 
@@ -33,9 +34,10 @@ export async function login({ email, password }) {
         );
         return response.data;
     } catch (error) {
-        const message = error?.response?.data?.message || error?.message || 'Login failed';
+        const url = error?.config?.url || 'unknown URL';
+        const message = error?.response?.data?.message || err.message || error?.message || 'Login failed';
         console.error('Login error:', message);
-        throw new Error(message);
+        throw new Error(`${message} (Attempted to reach: ${url})`);
     }
 }
 

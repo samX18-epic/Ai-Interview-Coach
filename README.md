@@ -1,6 +1,6 @@
 Resume Tailor is an elite career-optimization engine designed to bridge the gap between candidates and ATS (Applicant Tracking Systems). Using Google Gemini 2.5 Flash, it transforms static resumes into targeted, high-fidelity interview roadmaps and tailored PDFs.
 
-🛠 Tech Stack
+Tech Stack
 Frontend: React.js (Vite), SCSS (Glassmorphism), Axios
 
 Backend: Node.js, Express.js, MongoDB (Mongoose)
@@ -13,8 +13,8 @@ Auth: JWT, HTTP-only Cookies
 
 Deployment: Vercel (Frontend), Railway (Backend)
 
-✨ Key Features
-🧠 AI-Powered Analysis
+ Key Features
+ AI-Powered Analysis
 Utilizes a custom prompt-chaining pipeline with Gemini 2.5 to perform:
 
 Keyword Alignment: Identifies missing terminology required by the Job Description.
@@ -23,7 +23,7 @@ Behavioral Simulation: Predicts interview questions based on user history.
 
 Strategic Roadmap: Provides a structured plan to address skill gaps.
 
-📄 Dynamic PDF Generation
+ Dynamic PDF Generation
 Unlike standard text exports, Resume Tailor uses Puppeteer to render enterprise-grade documents. It dynamically injects AI-curated content into an ATS-friendly template, ensuring your profile clears automated filters with a professional layout.
 
 🛡 Secure Session Architecture
@@ -31,7 +31,7 @@ Hardened Auth: Uses HTTP-only, cross-site proxy-trusted cookies.
 
 CORS Management: Orchestrates secure data flow between the Vercel-hosted client and the Railway-hosted API.
 
-🏗 System Architecture
+ System Architecture
 Ingestion: User uploads a Resume (PDF) and Job Description (Text).
 
 Processing: Node.js backend sends data to Gemini 2.5 for multi-vector analysis.
@@ -42,7 +42,7 @@ Rendering: Puppeteer spins up a headless browser, renders the tailored resume as
 
 Persistence: History and reports are saved to MongoDB for low-latency retrieval.
 
-🚀 Deployment & Engineering Challenges
+Deployment & Engineering Challenges
 Headless Chromium on Railway
 Running Puppeteer in a PaaS environment requires specific system-level libraries. This project uses a custom nixpacks.toml to ensure the Linux environment is provisioned with the necessary Chromium dependencies:
 
@@ -52,7 +52,7 @@ nixPkgs = ["...", "google-chrome", "glib", "nss"]
 AI Prompt Engineering
 The Gemini integration uses structured output parsing to ensure the AI returns valid JSON every time, preventing UI crashes and ensuring the "Skill Gap Analysis" remains data-driven and objective.
 
-📦 Installation
+Installation
 Clone the repo:
 
 Bash
